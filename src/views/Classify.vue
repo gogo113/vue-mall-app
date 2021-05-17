@@ -4,12 +4,32 @@
         <van-icon name="search" />
         <div>苹果特价1元一斤</div>
       </div>
+      <one-tab></one-tab>
+      <template v-if="showContent">
+        <side-bar></side-bar>
+        <goods-list></goods-list>>
+      </template>
+      <van-loading size="2rem" vertical v-else />
   </div>
 </template>
 
 <script>
-export default {
+import OneTab from '@/components/OneTab.vue';
+import SideBar from '@/components/SideBar.vue';
+import GoodsList from '@/components/GoodsList.vue';
+import { mapState } from 'vuex';
 
+export default {
+  computed: {
+    ...mapState({
+      showContent: (state) => state.showContent,
+    }),
+  },
+  components: {
+    OneTab,
+    SideBar,
+    GoodsList,
+  },
 };
 </script>
 <style lang="less" scoped>

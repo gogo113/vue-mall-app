@@ -9,11 +9,21 @@ const request = Axios.create({
     appkey,
   },
 });
-
+request.interceptors.response.use((value) => value.data);
 const getSideList = (type) => request.get(
   URLS.getSide,
-  { paramsa: { type } },
+  { params: { type } },
+);
+
+const getGoodsList = (type, page, size, sort) => request.get(
+  URLS.getGoodsList,
+  {
+    params: {
+      type, size, sort, page,
+    },
+  },
 );
 export default {
   getSideList,
+  getGoodsList,
 };

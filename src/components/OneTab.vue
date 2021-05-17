@@ -18,6 +18,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import tool from '@/util/tool';
 
 export default {
   data() {
@@ -121,26 +122,14 @@ export default {
       const itemWidth = e.target.offsetWidth;
       const itemLeft = e.target.getBoundingClientRect().left;
       const wrapperWidth = oneTab.offsetWidth;
-      this.moveTo(oneTab.scrollLeft, itemWidth / 2 + itemLeft - wrapperWidth / 2);
+      tool.moveTo(oneTab.scrollLeft, itemWidth / 2 + itemLeft - wrapperWidth / 2, oneTab, 'scrollLeft');
       //   console.log(i);
       // 获取侧边栏数据（ sidebar + data ）
       this.getSideList(this.menuList[i].title);
     },
-    moveTo(start, end) {
-      let dis = 0;
-      let speed = 5;
-      if (end < 0) {
-        speed *= -1;
-      }
-      const t = setInterval(() => {
-        dis += speed;
-        this.$refs.oneTab.scrollLeft = start + end;
-        if (Math.abs(dis) > Math.abs(end)) {
-          this.$refs.oneTab.scrollLeft = start + end;
-          clearInterval(t);
-        }
-      }, 2);
-    },
+  },
+  mounted() {
+    this.getSideList(this.menuList[0].title);
   },
 };
 </script>
