@@ -22,9 +22,16 @@
             @load="onLoad"
             :immediate-check="false"
           >
-            <goods-card
+            <!--课程源码（老师）
+               <goods-card
               v-for="item in goodsList"
               :key="item.id"
+              v-bind="item"
+              :num = "counterMap[item.id]">
+            </goods-card> -->
+            <goods-card
+              v-for="(item,i) in goodsList"
+              :key="i"
               v-bind="item"
               :num = "counterMap[item.id]">
             </goods-card>
